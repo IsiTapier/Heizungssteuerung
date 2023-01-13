@@ -1,0 +1,70 @@
+<!-- Complete project details: https://randomnerdtutorials.com/esp32-web-server-websocket-sliders/ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP IOT Heizungssteuerung</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="topnav">
+        <h1>Heizungs Steuerung</h1>
+    </div>
+    <div class="content">
+        <div class="card-grid">
+            <div class="card">
+                <p class="card-title">Heizungsstatus</p>
+                <!-- <p class="state">Status: <input type="checkbox" onchange="updateTimeInput(this)" id="valveState" name="Heizungs Status"/><span class="slider round"></span></p> -->
+                <label class="switch spacer">
+                    <input type="checkbox" onchange="updateCheckbox(this)" id="valveState" name="Heizungs Status"/>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="card">
+                <p class="card-title">Einstell-Modi</p>
+                <label class="switch spacer">
+                    <input type="checkbox" onchange="updateCheckbox(this)" id="force" name="force Status"/>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="card">
+                <p class="card-title">Dauer Warmphase (Min.)</p>
+                <input class="spacer" type="number" onchange="updateTimeInput(this)" id="warmphaseDuration" name="Warmphase" min="0" max="600" required>
+            </div>
+            <div class="card">
+                <p class="card-title">Deepsleep Werktag</p>
+                <div>               Start : <input type="time" onchange="updateTimeInput(this)" id="workdayStart" name="Mo-Fr Ende" min="00:00" max="23:59" required></div>
+                <div class="spacer">Ende: <input type="time" onchange="updateTimeInput(this)" id="workdayEnd" name="Mo-Fr Start" min="00:00" max="23:59" required></div>
+            </div>
+            <div class="card">
+                <p class="card-title">Deepsleep Wochenende</p>
+                <div>               Start : <input type="time" onchange="updateTimeInput(this)" id="weekendStart" name="Sa-So Start" min="00:00" max="23:59" required></div>
+                <div class="spacer">Ende: <input type="time" onchange="updateTimeInput(this)" id="weekendEnd" name="Sa-so Ende" min="00:00" max="23:59" required></div>
+            </div>
+            <div class="card">
+                <p class="card-title">Dauer Impuls (ms)</p>
+                <input class="spacer" type="number" onchange="updateTimeInput(this)" id="impulsDuration" name="Impuls" min="0" max="10000" required>
+            </div>
+            <div class="card">
+                <p class="card-title">Mo-Fr</p>
+                <span class="spacer" id="workdayHeattimes">
+                    <div class="d-block"><button style="visibility: hidden" onclick="removeTimeInput(this)">-</button><input type="time" onchange="updateTimeInput(this)" id="workdayHeattime0" name="Mo-Fr" min="00:00" max="23:59" required></div>
+                </span>
+                <!-- <button onclick="addTimeInput("workday")" class="spacer" id="workdayAddButton">+</button> -->
+                <br />
+            </div>
+            <div class="card">
+                <p class="card-title">Sa-So</p>
+                <span class="spacer" id="weekendHeattimes">
+                    <div class="d-block"><button style="visibility: hidden" onclick="removeTimeInput(this)">-</button><input type="time" onchange="updateTimeInput(this)" id="weekendHeattime0" name="Sa-So" min="00:00" max="23:59" required></div>
+                </span>
+                <!-- <button onclick="addTimeInput("weekend")" class="spacer" id="weekendAddButton">+</button> -->
+                <br />
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
